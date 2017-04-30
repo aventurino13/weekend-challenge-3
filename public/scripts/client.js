@@ -19,8 +19,9 @@ function addTask (){
     data: objectToSend,
     success: function( response ){
       console.log( 'back from server with:', response );
-    }
-  });
+    }//end success
+  });//end POST ajax
+  getAllTasks();
 }//end getTasks
 
 function getAllTasks (){

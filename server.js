@@ -5,6 +5,7 @@ var pg = require( 'pg' );
 var path = require ( 'path' );
 var bodyParser = require ( 'body-parser' );
 var port = 7777;
+var allTasks = [];
 
 //setup config for pool
 var config = {
@@ -49,3 +50,28 @@ app.post ('/addTask', function( req, res){
     }//end else
   });//end pool connect
 });//end app.post
+
+app.get ('/getAllTasks', function( req, res){
+  console.log('in GET tasks route');
+  allTasks = [];
+  pool.connect( function( err, connection, done ){
+  if( err ){
+    console.log( err );
+    res.send( 400 );
+  } else {
+    console.log('connected to db');
+    var resultSet = connection.query( "SELECT * from tasks" );
+    resultSet.on( 'row', function( row ){
+      allTasks.push( row );
+    }); //end on row
+    // on end of rows send array as response
+    resultSet.on( 'end', function(){
+      // close connection to reopen spot in pool
+      done();
+      // res.send array of cars
+      res.send( allTasks );
+    }); //end on end
+  } // end no error
+}); //end po
+
+});//end getAllTasks
