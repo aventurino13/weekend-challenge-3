@@ -1,0 +1,7 @@
+div.incompleteTask {
+  background-color:blue;
+}
+
+div.completedTask {
+  background-color: green;
+}
