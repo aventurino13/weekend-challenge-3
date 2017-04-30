@@ -1,21 +1,21 @@
 //requires
 var express = require ( 'express' );
 var app = express();
-// var pg = require( 'pg' );
+var pg = require( 'pg' );
 var path = require ( 'path' );
 var bodyParser = require ( 'body-parser' );
 var port = 7777;
 
-// setup config for pool
-// var config = {
-//   database: 'wknd_chal_3',
-//   host: 'localhost',
-//   port: 5432,
-//   max: 12
-// };//end pool config
-// 
-// //create pool using config
-// var pool = new pg.Pool( config );
+//setup config for pool
+var config = {
+  database: 'wknd_chal_3',
+  host: 'localhost',
+  port: 5432,
+  max: 12
+};//end pool config
+
+//create pool using config
+var pool = new pg.Pool( config );
 
 //uses
 app.use ( express.static( 'public' ) );
@@ -33,3 +33,19 @@ app.get ('/', function( req, res){
   console.log('base url hit');
   res.sendFile( path.resolve ('public/views/index.html') );
 });//end base url
+
+//POST new task
+app.post ('/addTask', function( req, res){
+  console.log('in post route:', req.body);
+
+  pool.connect ( function (err, connection, done ){
+    if (err) {
+     res.send ( 400 );
+    } else {
+      console.log('connected to db');
+      connection.query("INSERT into tasks(task_name, complete) values($1, $2)", [ req.body.task, req.body.complete] );
+      done(); //close connection
+      res.send ( 200 );
+    }//end else
+  });//end pool connect
+});//end app.post
