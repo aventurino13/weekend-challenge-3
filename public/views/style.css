@@ -1,8 +1,49 @@
+h1 {
+font-family: 'Quicksand', sans-serif;
+font-size: 50px;
+background-color: #AC7676;
+text-align: center;
+
+}
+
+
+h2 {
+  text-align: right;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 30px;
+  background-color: white;
+  margin-left: 400px;
+  margin-right: 40px;
+}
+
+body {
+  background-image: url(https://i.redd.it/s3bsz6wndopx.jpg);
+  background-size: cover;
+}
+
 div.incompleteTask {
-  background-color:blue;
+  background-color: #8A5D5D;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: 40px;
+  margin-right: 400px;
 }
 
 div.completedTask {
-  background-color: green;
+  background-color: white;
   text-decoration: line-through;
+  text-align: right;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: 400px;
+  margin-right: 40px;
+}
+
+div.taskList {
+  background-color: #AC7676;
+  padding: 10px
 }
