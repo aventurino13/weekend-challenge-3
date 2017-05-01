@@ -1,8 +1,12 @@
 h1 {
 font-family: 'Quicksand', sans-serif;
 font-size: 50px;
-background-color: #AC7676;
+background-color: #4281A4;
 text-align: center;
+margin-left: 10em;
+margin-right: 10em;
+padding: 10px;
+border: 2px #9CAFB7 dashed
 
 }
 
@@ -11,34 +15,40 @@ h2 {
   text-align: right;
   font-family: 'Quicksand', sans-serif;
   font-size: 30px;
-  background-color: white;
-  margin-left: 400px;
-  margin-right: 40px;
+  background-color: #9CAFB7;
+  margin-left: 33em;
+  margin-right: 5em;
+  padding: 3px;
+  border: 2px #4281A4 solid
 }
 
 body {
   background-image: url(https://i.redd.it/s3bsz6wndopx.jpg);
   background-size: cover;
+  text-align: center;
 }
 
+
+
 div.incompleteTask {
-  background-color: #AC7676;
+  background-color: #E6B89C;
   font-family: 'Quicksand', sans-serif;
   font-size: 20px;
   padding-left: 20px;
-  padding-right: 20px;
-  margin-left: 40px;
-  margin-right: 400px;
+  margin-top: 1em;
+  margin-left: 5em;
+  margin-right: 40em;
+  border-radius: 0.25em
 }
 
 div.completedTask {
-  background-color: white;
+  background-color: #9CAFB7;
   text-decoration: line-through;
-  text-align: right;
   font-family: 'Quicksand', sans-serif;
   font-size: 20px;
-  padding-left: 20px;
   padding-right: 20px;
-  margin-left: 400px;
-  margin-right: 40px;
+  margin-top: 1em;
+  margin-left: 40em;
+  margin-right: 5em;
+  border-radius: 0.25em
 }
