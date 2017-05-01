@@ -99,3 +99,15 @@ app.get('/completeTask/:id', function( req, res ) {
     }//end else
   });
 });
+
+app.get('/incompleteTask/:id', function( req, res ) {
+  pool.connect (function ( err, connection, done ){
+    if (err){
+      res.send( 400 );
+    } else {
+      connection.query("UPDATE tasks SET complete=false WHERE id=$1", [req.params.id]);
+      done();
+      res.send("incomplete");
+    }//end else
+  });
+});

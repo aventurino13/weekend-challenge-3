@@ -25,6 +25,7 @@ function addTask (){
     }//end success
   });//end POST ajax
   getAllTasks();
+  $('#addTask').val("");
 }//end getTasks
 
 function getAllTasks (){
@@ -78,7 +79,13 @@ function completeTask () {
       }
     });
   } else {
-    $(this).parent().toggleClass("completeTask");
+    $.ajax ({
+      url: '/incompleteTask/' + id,
+      method: 'GET',
+      success: function (response){
+        console.log('incomplete:', response);
+        getAllTasks();
+      }
+    });
   }//end else
-
 }
