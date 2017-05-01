@@ -47,7 +47,7 @@ function appendTasks(array) {
        if (array[i].complete === false){
        $( '.taskList' ).append( '<div class="incompleteTask" id="' + array[i].id +' ">' + array[i].task_name + ' ' + '<button class="complete">Complete</button>' + '<button class="delete">Delete</button>' + '</div>' );
         } else {
-          $( '.taskList' ).append( '<div class="completedTask" id="' + array[i].id +' ">' + array[i].task_name + ' ' +  '<button class="complete">Complete</button>' + '<button class="delete">Delete</button>' + '</div>' );
+          $( '.taskList' ).append( '<div class="completedTask" id="' + array[i].id +' ">' + array[i].task_name + ' ' +  '<button class="complete">Incomplete</button>' + '<button class="delete">Delete</button>' + '</div>' );
            }
         }//end for loop
 }//end appendTasks
