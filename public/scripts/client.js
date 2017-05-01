@@ -5,6 +5,7 @@ function onReady (){
   getAllTasks();
   $('#addTaskButton').on('click', addTask);
   $('.taskList').on('click', 'button.delete', deleteTask);
+  $('.taskList').on('click', 'button.complete', completeTask);
 }
 
 function addTask (){
@@ -45,14 +46,13 @@ function appendTasks(array) {
        if (array[i].complete === false){
        $( '.taskList' ).append( '<div class="incompleteTask" id="' + array[i].id +' ">' + array[i].task_name + ' ' + '<button class="complete">Complete</button>' + '<button class="delete">Delete</button>' + '</div>' );
         } else {
-          $( '.taskList' ).append( '<div class="completedTask" id="' + array[i].id +' ">' + array[i].task_name + ' ' + '<button class="delete">Delete</button>' + '</div>' );
+          $( '.taskList' ).append( '<div class="completedTask" id="' + array[i].id +' ">' + array[i].task_name + ' ' +  '<button class="complete">Complete</button>' + '<button class="delete">Delete</button>' + '</div>' );
            }
         }//end for loop
 }//end appendTasks
 
 
 function deleteTask () {
-  // $('button.delete').on('click', function (){
     var id = $(this).parent().attr('id');
     $.ajax ({
       url: '/deleteTask/' + id,
@@ -62,5 +62,23 @@ function deleteTask () {
         getAllTasks();
         }//end success
       });//end ajax
-    // });//end on delete click
 }//end delete Task
+
+function completeTask () {
+  var id = $(this).parent().attr('id');
+  var currentStatus = $(this).parent().attr('class');
+  console.log (($(this).parent().hasClass('completedTask')));
+  if ($(this).parent().hasClass('incompleteTask') === true) {
+    $.ajax ({
+      url: '/completeTask/' + id,
+      method: 'GET',
+      success: function (response){
+        console.log('in complete:', response);
+        getAllTasks();
+      }
+    });
+  } else {
+    $(this).parent().toggleClass("completeTask");
+  }//end else
+
+}

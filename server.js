@@ -87,3 +87,15 @@ app.delete('/deleteTask/:id', function(req, res){
     }//end else
   });
 });
+
+app.get('/completeTask/:id', function( req, res ) {
+  pool.connect (function ( err, connection, done ){
+    if (err){
+      res.send( 400 );
+    } else {
+      connection.query("UPDATE tasks SET complete=true WHERE id=$1", [req.params.id]);
+      done();
+      res.send("completed");
+    }//end else
+  });
+});
