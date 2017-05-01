@@ -70,8 +70,20 @@ app.get ('/getAllTasks', function( req, res){
       done();
       // res.send array of cars
       res.send( allTasks );
-    }); //end on end
-  } // end no error
-}); //end po
-
+      }); //end on end
+    } // end no error
+  }); //end pool connect
 });//end getAllTasks
+
+app.delete('/deleteTask/:id', function(req, res){
+  console.log('this is req.params.id field', req.params.id);
+  pool.connect (function ( err, connection, done ){
+    if (err){
+      res.send( 400 );
+    } else {
+      connection.query("DELETE FROM tasks WHERE id=$1", [req.params.id]);
+      done();
+      res.send("deleted");
+    }//end else
+  });
+});

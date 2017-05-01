@@ -4,7 +4,7 @@ function onReady (){
   console.log('script sourced');
   getAllTasks();
   $('#addTaskButton').on('click', addTask);
-  $('.taskList').on('click', deleteTask);
+  $('.taskList').on('click', 'button.delete', deleteTask);
 }
 
 function addTask (){
@@ -43,14 +43,24 @@ function appendTasks(array) {
   $( '.taskList' ).empty();
      for (var i = 0; i < array.length; i++) {
        if (array[i].complete === false){
-       $( '.taskList' ).append( '<div class="incompleteTask" id="' + array[i].id +' "><p>' + array[i].task_name + ' ' + '<button id="complete">Complete</button>' + '<button id="delete">Delete</button>' + '</p></div>' );
+       $( '.taskList' ).append( '<div class="incompleteTask" id="' + array[i].id +' ">' + array[i].task_name + ' ' + '<button class="complete">Complete</button>' + '<button class="delete">Delete</button>' + '</div>' );
         } else {
-          $( '.taskList' ).append( '<div class="completedTask" id="' + array[i].id +' "><p>' + array[i].task_name + ' ' + '<button id="delete">Delete</button>' + '</p></div>' );
+          $( '.taskList' ).append( '<div class="completedTask" id="' + array[i].id +' ">' + array[i].task_name + ' ' + '<button class="delete">Delete</button>' + '</div>' );
            }
         }//end for loop
 }//end appendTasks
 
+
 function deleteTask () {
-  var id = $(this).parent().attr('id');
-  console.log( $(this).parent().attr('id'));
+  // $('button.delete').on('click', function (){
+    var id = $(this).parent().attr('id');
+    $.ajax ({
+      url: '/deleteTask/' + id,
+      method: 'DELETE',
+      success: function (response){
+        console.log('in delete:', response);
+        getAllTasks();
+        }//end success
+      });//end ajax
+    // });//end on delete click
 }//end delete Task
